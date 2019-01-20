@@ -1,3 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 .App {
   text-align: center;
+  font-family: 'Raleway', sans-serif;
+  background: #dbe9ee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  
+}
+h2{
+  text-align: center;
+}
+.btn{
+ padding: 5px;
+ margin: 5px;
+ width:10em;
+ height: 3em;
+ outline: none;
+ border:none;
+  border-radius: .25em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.btn_add{
+  background: 	rgba(14, 107, 84, 0.507)
+}
+.btn_delete{
+  background: #ff666686
+}
+input{
+background: none;
+outline:none;
+margin: 5px;
+border-radius: .25em;
+padding: 5px;
+border: solid 0.5px grey;
+}
+input:focus,
+input:active{
+  border:none;
+  border-bottom: solid #2c3e50;
+  transition: 1s;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 ;
+  background: #446280a4;
+  width:15em;
+  height: 3em;
+  line-height: 3;
+  overflow: hidden;
+  border-radius: .25em;
+  margin: 2px;
+  color: #fff;
+  cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+/* Arrow */
+.select::after {
+
+  padding: 0 1em;
+  background: #34495e9d;
+  pointer-events: none;
+}
+
+.select::after {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
 }
