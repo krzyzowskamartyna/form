@@ -8,7 +8,7 @@
     else {
         console.log('Supported')
     }
-    var request = window.indexedDB.open("myPrettyDatabase", 1);
+    var request = window.indexedDB.open("myDatabase", 1);
 
 
     request.onerror = function (event) {
@@ -25,8 +25,8 @@
     request.onupgradeneeded = function (event) {
         db = event.target.result;
         var objectStore = db.createObjectStore('person', { keyPath: 'id' }, { autoIncrement: true });
-        objectStore.createIndex('name', 'name', { unique: false });
-        objectStore.createIndex('email', 'email', { unique: true });
+        objectStore.createIndex('question', 'question', { unique: false });
+        objectStore.createIndex('type', 'type', { unique: true });
     }
 
 })()

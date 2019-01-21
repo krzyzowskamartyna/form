@@ -1,129 +1,144 @@
 import React, { Component } from "react";
 import Child from "./Child";
-
-
-const data = {
-    "question": "",
-    "type": "",
-    "child": {
-        "question": "",
-        "type": "",
-        "child": []
-    }
-}
+import data from './data';
 
 class Form extends Component {
     state = {
-        inputs: [{ question: "", type: "", children: {} }],
+        inputs: data,
         show: false,
-        count: 0
+        checked: false
     };
 
     handleNameChange = e => {
         this.setState({ name: e.target.value });
     };
 
-    toggleComponent = idx => () => {
+    //Generate sub-input
+    toggleComponent = () => e => {
         this.setState(state => ({
             show: !state.show
         }));
     };
 
-    inputNameChange = idx => e => {
-        const newInputs = this.state.inputs.map((input, sidx) => {
-            if (idx !== sidx) return input;
+    inputNameChange = id => e => {
+        const newInputs = this.state.inputs.map((input, sid) => {
+            if (id !== sid) return input;
             return { ...input, question: e.target.value };
         });
 
         this.setState({ inputs: newInputs });
     };
+
     //New Input
     addInput = () => {
         this.setState({
-            inputs: this.state.inputs.concat([{ question: "" }]),
+            inputs: this.state.inputs.concat(data),
         });
     };
+
     //Delete Input
-    removeInput = idx => () => {
+    removeInput = id => () => {
         this.setState({
-            inputs: this.state.inputs.filter((s, sidx) => idx !== sidx)
+            inputs: this.state.inputs.filter((s, sid) => id !== sid)
         });
     }
+
+    //Change Input Value !!
     onChange = e => {
-        if (e.target.value) {
-            this.setState({ InputValue: e.target.value });
-        }
         if (e.target.checked || !e.target.checked) {
             this.setState({ isChecked: !this.state.isChecked })
         }
     }
 
+    //To toggle button (JSON)
+    status = () => {
+        this.state.checked === false
+            ? this.setState({ checked: true })
+            : this.setState({ checked: false });
+    }
+
     render() {
         const { show } = this.state;
         return (
-
-            <form className="form">
-                <h2>Form Builder</h2>
-                {this.state.inputs.map((input, idx) => (
-                    <div className="input" key={idx}>
-                        <label htmlFor={input.question} className="label">Question</label>
-                        <input
-                            type="text"
-                            className="input"
-                            value={input.question}
-                            onChange={this.inputNameChange(idx)}
-                            required
-                        />
-                        <label className="label">Type</label>
-                        <select value={input.value} className="select">
-                            <option
-                                checked={this.state.isChecked}
-                                onChange={this.onChange}
-                                type={'text'}
-                                value={input.type}>
-                                Text
+            <div>
+                <form className="form">
+                    <h1>Form Builder</h1>
+                    {this.state.inputs.map((input, id) => (
+                        <div className="input" key={id}>
+                            <label htmlFor={input.question} className="label">Question</label>
+                            <input
+                                type={input.type}
+                                className="input"
+                                value={input.question}
+                                onChange={this.inputNameChange(id)}
+                                required
+                            />
+                            <label className="label">Type</label>
+                            <select value={this.state.value} onChange={this.onChange} className="select">
+                                <option
+                                    checked={this.state.isChecked}
+                                    onChange={this.onChange}
+                                    type={input.type}
+                                    name="text"
+                                    value={input.type}
+                                >
+                                    Text
                             </option>
-                            <option
-                                checked={this.state.isChecked}
-                                onChange={this.onChange}
-                                type={'number'}
-                                value={input.type}>
-                                Number
+                                <option
+                                    checked={this.state.isChecked}
+                                    onChange={this.onChange}
+                                    type={input.type}
+                                    name="number"
+                                    value={input.type}>
+                                    Number
                             </option>
-                            <option checked={this.state.isChecked}
-                                onChange={this.onChange}
-                                type={'radio'}
-                                value={input.type}>
-                                Yes/No
+                                <option checked={this.state.isChecked}
+                                    onChange={this.onChange}
+                                    type={input.type}
+                                    name="radio"
+                                    value={input.type}>
+                                    Yes/No
                             </option>
-                        </select>
-                        <button
-                            type="button"
-                            onClick={this.removeInput(idx)}
-                            className="btn btn_delete"
-                        >
-                            Delete input
+                            </select>
+                            <button
+                                type="button"
+                                onClick={this.removeInput(id)}
+                                className="btn btn_delete"
+                            >
+                                Delete input
               </button>
-                        <button
-                            type="button"
-                            onClick={this.toggleComponent(idx)}
-                            className="btn btn_add"
-                        >
-                            {show ? "Remove sub-input" : "Add sub-input"}
-                        </button>
+                            <button
+                                type="button"
+                                onClick={this.toggleComponent(id)}
+                                className="btn btn_add"
+                            >
+                                {show ? "Remove sub-input" : "Add sub-input"}
+                            </button>
 
-                        {show && <Child />}
-                    </div>
-                ))}
-                <button
-                    type="button"
-                    onClick={this.addInput}
-                    className="btn btn_add"
-                >
-                    Add input
+                            {show && <Child />}
+                        </div>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={this.addInput}
+                        className="btn btn_add"
+                    >
+                        Add input
               </button>
+                </form>
+                <div>
+                    <input
+                        className="checkbox"
+                        type="checkbox"
+                        onClick={this.status}
+                    />
+                    <span className={this.state.checked ? 'green' : 'red'}>
+                        {this.state.checked ? <pre>{JSON.stringify(this.state.inputs, null, 2)}</pre> : 'Show JSON'}
+                    </span>
 
-            </form>
+                </div>
+            </div>
+
         );
     }
 }

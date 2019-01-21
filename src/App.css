@@ -2,15 +2,16 @@
 .App {
   text-align: center;
   font-family: 'Raleway', sans-serif;
-  background: #dbe9ee;
+  background: #f7fafc;
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
   
 }
-h2{
+h1,h2{
   text-align: center;
+  font-weight: 100;
 }
 .btn{
  padding: 5px;
@@ -24,10 +25,14 @@ h2{
   cursor: pointer;
 }
 .btn_add{
-  background: 	rgba(14, 107, 84, 0.507)
+  background: #B1D5CD
 }
 .btn_delete{
-  background: #ff666686
+  background: 	#d8b1c4
+}
+.checkbox{
+  width:4em;
+  height: 2em;
 }
 input{
 background: none;

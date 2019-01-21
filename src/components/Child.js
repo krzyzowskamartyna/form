@@ -1,17 +1,18 @@
 import React from "react";
 
 class Child extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0,
-            inputs: [{ question: "", type: "", children: {} }],
-            show: false
-        };
+    state = {
+        inputs: [],
+        show: false
     }
+    toggleComponent = () => {
+        this.setState(state => ({
+            show: !state.show,
+        }));
+    };
 
     render() {
-        //   const { children: { } } = this.state;
+        const { show } = this.state;
         return (
             <div >
                 <div className="input" >
@@ -19,21 +20,27 @@ class Child extends React.Component {
                     <input
                         type="text"
                         className="input"
-                        value={this.state.value}
-
+                        value={this.props.question}
                     />
+                    {this.props.data}
                     <label className="label">Type</label>
-                    <select value={this.state.value} className="select">
+                    <select value={this.props.value} className="select">
                         <option type="text" value="text">Text</option>
                         <option type="number" value="number">Number</option>
                         <option type="radio" value="radio">Yes/No</option>
                     </select>
+                    <button
+                        type="button"
+                        onClick={this.toggleComponent}
+                        className="btn btn_add"
+                    >
+                        {show ? "Remove sub-input" : "Add sub-input"}
+                    </button>
 
+                    {show && <Child />}
                 </div>
             </div>
         );
     }
-
-
 }
 export default Child;
