@@ -5,22 +5,16 @@ class Child extends React.Component {
         super(props);
         this.state = {
             count: 0,
+            inputs: [{ question: "", type: "", children: {} }],
             show: false
         };
     }
-    toggleComponent = () => {
-        // log(`${this.state.show ? "Unmounting" : "Mounting"}`);
-        this.setState(state => ({
-            show: !state.show
-        }));
-    };
+
     render() {
-        //const { show } = this.state;
+        //   const { children: { } } = this.state;
         return (
             <div >
-
                 <div className="input" >
-
                     <label className="label">Question</label>
                     <input
                         type="text"
