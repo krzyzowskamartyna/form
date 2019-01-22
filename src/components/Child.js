@@ -20,11 +20,10 @@ class Child extends React.Component {
                     <input
                         type="text"
                         className="input"
-                        value={this.props.question}
+                        value={this.state.question}
                     />
-                    {this.props.data}
                     <label className="label">Type</label>
-                    <select value={this.props.value} className="select">
+                    <select value={this.state.value} className="select">
                         <option type="text" value="text">Text</option>
                         <option type="number" value="number">Number</option>
                         <option type="radio" value="radio">Yes/No</option>

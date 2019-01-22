@@ -50,7 +50,7 @@ class Form extends Component {
         }
     }
 
-    //To toggle button (JSON)
+    //Toggle button (show JSON)
     status = () => {
         this.state.checked === false
             ? this.setState({ checked: true })
@@ -132,10 +132,7 @@ class Form extends Component {
                         type="checkbox"
                         onClick={this.status}
                     />
-                    <span className={this.state.checked ? 'green' : 'red'}>
-                        {this.state.checked ? <pre>{JSON.stringify(this.state.inputs, null, 2)}</pre> : 'Show JSON'}
-                    </span>
-
+                    {this.state.checked ? <pre>{JSON.stringify(this.state.inputs, null, 2)}</pre> : 'Show JSON'}
                 </div>
             </div>
 
