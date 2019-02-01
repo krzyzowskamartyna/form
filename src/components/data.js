@@ -2,6 +2,11 @@ export default [
     {
         "question": "",
         "type": "",
-        "child": {}
+        "sub_input": [{
+            "question": "",
+            "type": "",
+            "sub_input": [{}]
+        }]
+
     }
 ]

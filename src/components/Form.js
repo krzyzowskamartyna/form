@@ -5,19 +5,24 @@ import data from './data';
 class Form extends Component {
     state = {
         inputs: data,
+        // children: [],
         show: false,
         checked: false
     };
 
-    handleNameChange = e => {
-        this.setState({ name: e.target.value });
-    };
 
     //Generate sub-input
     toggleComponent = () => e => {
         this.setState(state => ({
             show: !state.show
         }));
+    };
+
+    //New Input
+    addInput = (id) => {
+        this.setState({
+            inputs: this.state.inputs.concat(data),
+        });
     };
 
     inputNameChange = id => e => {
@@ -29,12 +34,15 @@ class Form extends Component {
         this.setState({ inputs: newInputs });
     };
 
-    //New Input
-    addInput = () => {
-        this.setState({
-            inputs: this.state.inputs.concat(data),
+    inputTypeChange = id => e => {
+        const newTypes = this.state.inputs.map((type, sid) => {
+            if (id !== sid) return type;
+            return { ...type, type: e.target.value };
         });
+
+        this.setState({ inputs: newTypes });
     };
+
 
     //Delete Input
     removeInput = id => () => {
@@ -57,11 +65,17 @@ class Form extends Component {
             : this.setState({ checked: false });
     }
 
+    //Submit
+    handleSubmit = e => {
+        console.log(this.state);
+        e.preventDefault();
+    };
+
     render() {
         const { show } = this.state;
         return (
             <div>
-                <form className="form">
+                <form className="form" onSubmit={this.handleSubmit}>
                     <h1>Form Builder</h1>
                     {this.state.inputs.map((input, id) => (
                         <div className="input" key={id}>
@@ -74,29 +88,24 @@ class Form extends Component {
                                 required
                             />
                             <label className="label">Type</label>
-                            <select value={this.state.value} onChange={this.onChange} className="select">
+                            <select value={this.state.value} onChange={this.inputTypeChange(id)} className="select">
                                 <option
-                                    checked={this.state.isChecked}
-                                    onChange={this.onChange}
                                     type={input.type}
                                     name="text"
-                                    value={input.type}
+                                    value="Text"
                                 >
                                     Text
-                            </option>
+                                    </option>
                                 <option
-                                    checked={this.state.isChecked}
-                                    onChange={this.onChange}
                                     type={input.type}
                                     name="number"
-                                    value={input.type}>
+                                    value="Number">
                                     Number
                             </option>
-                                <option checked={this.state.isChecked}
-                                    onChange={this.onChange}
+                                <option
                                     type={input.type}
                                     name="radio"
-                                    value={input.type}>
+                                    value="Yes/No">
                                     Yes/No
                             </option>
                             </select>
@@ -114,7 +123,7 @@ class Form extends Component {
                             >
                                 {show ? "Remove sub-input" : "Add sub-input"}
                             </button>
-                            {show && <Child />}
+                            {show && <Child {...this.state.children} />}
                         </div>
                     ))}
                     <button
@@ -124,6 +133,13 @@ class Form extends Component {
                     >
                         Add input
               </button>
+                    <button
+                        type="button"
+                        className="btn btn_submit"
+                        onClick={this.handleSubmit}
+                    >
+                        Submit
+				</button>
                 </form>
                 <div>
                     <input
@@ -131,7 +147,7 @@ class Form extends Component {
                         type="checkbox"
                         onClick={this.status}
                     />
-                    {this.state.checked ? <pre>{JSON.stringify(this.state.inputs, null, 2)}</pre> : 'Show JSON'}
+                    {this.state.checked ? <pre>{JSON.stringify(this.state.inputs, null, 4)}</pre> : 'Show JSON'}
                 </div>
             </div>
 
