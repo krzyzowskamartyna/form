@@ -30,16 +30,16 @@ class Child extends React.Component {
         this.setState({ inputs: newTypes });
     }
 
-    /*toggleComponent = (id) => {
+    toggleComponent = (id) => {
         this.setState(state => ({
             show: !state.show,
         }));
-    };*/
+    };/*
     toggleComponent = e => {
         this.setState({
             show: this.state.inputs.concat(data),
         });
-    }
+    }*/
     //Brother
     addInput = e => {
         this.setState({
@@ -74,7 +74,7 @@ class Child extends React.Component {
                             onClick={this.addInput}
                             className="btn btn_add"
                         >
-                            Add Brother
+                            Add Input On My Level
                         </button>
 
                         <button

@@ -123,7 +123,7 @@ class Form extends Component {
                             >
                                 {show ? "Remove sub-input" : "Add sub-input"}
                             </button>
-                            {show && <Child {...this.state.children} />}
+                            {show && <Child />}
                         </div>
                     ))}
                     <button
