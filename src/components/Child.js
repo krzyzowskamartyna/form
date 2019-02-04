@@ -25,7 +25,7 @@ class Child extends React.Component {
         });
         this.setState({ inputs: newTypes });
     }
-
+    //Add sub-input
     toggleComponent = e => {
         this.setState({
             show: this.state.inputs.concat(data),

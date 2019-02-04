@@ -7,35 +7,24 @@ class Form extends Component {
         inputs: [],
         show: false
     }
-
     //Generate sub-input
     toggleComponent = () => e => {
         this.setState(state => ({
             show: !state.show
         }));
     };
-
     //New Input
     addInput = (id) => {
         this.setState({
             inputs: this.state.inputs.concat(data),
         });
     };
-
     //Delete Input
     removeInput = id => () => {
         this.setState({
             inputs: this.state.inputs.filter((s, sid) => id !== sid)
         });
     }
-
-    //Toggle button (show JSON)
-    status = () => {
-        this.state.checked === false
-            ? this.setState({ checked: true })
-            : this.setState({ checked: false });
-    }
-
 
     render() {
         const { show } = this.state;
