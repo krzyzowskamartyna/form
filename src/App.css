@@ -20,22 +20,34 @@ h1,h2{
 .btn{
  padding: 5px;
  margin: 5px;
- width:10em;
- height: 3em;
+ width:19em;
+ height: 4em;
  outline: none;
  border:none;
-  border-radius: .25em;
+  border-radius: 8px;
   text-transform: uppercase;
   cursor: pointer;
+  transition: 1s
 }
 .btn_add{
-  background: #B1D5CD
+  background: rgba(43, 156, 77, 0.215)
+}
+.btn_add:hover{
+  background: rgba(43, 156, 77, 0.426)
 }
 .btn_delete{
-  background: 	#d8b1c4
+  width: 10em;
+  background: rgba(238, 55, 104, 0.726)
+}
+.btn_delete:hover{
+  background: #EE3769
 }
 .btn_submit{
-  background: rgba(119, 207, 247, 0.692)
+  background: #41baeaab;
+  width: 10em;
+}
+.btn_submit:hover{
+  background: #41baea
 }
 .checkbox{
   width:4em;
@@ -56,27 +68,26 @@ input:active{
   transition: 1s;
 }
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
+
   outline: 0;
   box-shadow: none;
   border: 0 ;
-  background: #446280a4;
-  width:15em;
-  height: 3em;
+  background: #0534635e;
+  width:10em;
+  height: 3.5em;
   line-height: 3;
   overflow: hidden;
   border-radius: .25em;
   margin: 2px;
-  color: #fff;
+  color: black;
+  font-family: 'Raleway', sans-serif;
   cursor: pointer;
 }
 
 select::-ms-expand {
   display: none;
 }
-/* Arrow */
+
 .select::after {
 
   padding: 0 1em;
@@ -88,4 +99,14 @@ select::-ms-expand {
   -webkit-transition: .25s all ease;
   -o-transition: .25s all ease;
   transition: .25s all ease;
+}
+.select option{
+  position: relative;
+  display: block;
+  padding: 0 22px;
+  color: black;
+}
+.input{
+  border: solid 0.5px grey;
+  padding: 1%
 }

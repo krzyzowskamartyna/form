@@ -4,12 +4,9 @@ import data from './data';
 
 class Form extends Component {
     state = {
-        inputs: data,
-        // children: [],
-        show: false,
-        checked: false
-    };
-
+        inputs: [],
+        show: false
+    }
 
     //Generate sub-input
     toggleComponent = () => e => {
@@ -25,37 +22,11 @@ class Form extends Component {
         });
     };
 
-    inputNameChange = id => e => {
-        const newInputs = this.state.inputs.map((input, sid) => {
-            if (id !== sid) return input;
-            return { ...input, question: e.target.value };
-        });
-
-        this.setState({ inputs: newInputs });
-    };
-
-    inputTypeChange = id => e => {
-        const newTypes = this.state.inputs.map((type, sid) => {
-            if (id !== sid) return type;
-            return { ...type, type: e.target.value };
-        });
-
-        this.setState({ inputs: newTypes });
-    };
-
-
     //Delete Input
     removeInput = id => () => {
         this.setState({
             inputs: this.state.inputs.filter((s, sid) => id !== sid)
         });
-    }
-
-    //Change Input Value !!
-    onChange = e => {
-        if (e.target.checked || !e.target.checked) {
-            this.setState({ isChecked: !this.state.isChecked })
-        }
     }
 
     //Toggle button (show JSON)
@@ -65,65 +36,30 @@ class Form extends Component {
             : this.setState({ checked: false });
     }
 
-    //Submit
-    handleSubmit = e => {
-        console.log(this.state);
-        e.preventDefault();
-    };
 
     render() {
         const { show } = this.state;
         return (
             <div>
-                <form className="form" onSubmit={this.handleSubmit}>
+                <form className="form" >
                     <h1>Form Builder</h1>
                     {this.state.inputs.map((input, id) => (
-                        <div className="input" key={id}>
-                            <label htmlFor={input.question} className="label">Question</label>
-                            <input
-                                type={input.type}
-                                className="input"
-                                value={input.question}
-                                onChange={this.inputNameChange(id)}
-                                required
-                            />
-                            <label className="label">Type</label>
-                            <select value={this.state.value} onChange={this.inputTypeChange(id)} className="select">
-                                <option
-                                    type={input.type}
-                                    name="text"
-                                    value="Text"
-                                >
-                                    Text
-                                    </option>
-                                <option
-                                    type={input.type}
-                                    name="number"
-                                    value="Number">
-                                    Number
-                            </option>
-                                <option
-                                    type={input.type}
-                                    name="radio"
-                                    value="Yes/No">
-                                    Yes/No
-                            </option>
-                            </select>
-                            <button
-                                type="button"
-                                onClick={this.removeInput(id)}
-                                className="btn btn_delete"
-                            >
-                                Delete input
-              </button>
+                        <div key={id}>
                             <button
                                 type="button"
                                 onClick={this.toggleComponent(id)}
                                 className="btn btn_add"
                             >
-                                {show ? "Remove sub-input" : "Add sub-input"}
+                                {show ? "Delete input" : "Add input"}
                             </button>
-                            {show && <Child />}
+                            {show && <Child {...this.state} />}
+                            <button
+                                type="button"
+                                onClick={this.removeInput(id)}
+                                className="btn btn_delete"
+                            >
+                                Delete form
+                        </button>
                         </div>
                     ))}
                     <button
@@ -131,28 +67,12 @@ class Form extends Component {
                         onClick={this.addInput}
                         className="btn btn_add"
                     >
-                        Add input
-              </button>
-                    <button
-                        type="button"
-                        className="btn btn_submit"
-                        onClick={this.handleSubmit}
-                    >
-                        Submit
-				</button>
+                        Add new form
+                        </button>
                 </form>
-                <div>
-                    <input
-                        className="checkbox"
-                        type="checkbox"
-                        onClick={this.status}
-                    />
-                    {this.state.checked ? <pre>{JSON.stringify(this.state.inputs, null, 4)}</pre> : 'Show JSON'}
-                </div>
             </div>
-
         );
     }
-}
 
+}
 export default Form;
